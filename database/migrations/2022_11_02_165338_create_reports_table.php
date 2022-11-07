@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('temperature');//体温
             $table->tinyInteger('condition');//体調
             $table->tinyInteger('family');//家族
-            $table->string('text',100);//家族
+            $table->string('text',100);//その他
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

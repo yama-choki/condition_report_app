@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Report;
 
 class ReportController extends Controller
 {
@@ -34,7 +35,16 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $report = new Report;
+
+        $report->condition = $request->input('condition');
+        $report->temperature = $request->input('temperature');
+        $report->family = $request->input('family');
+        $report->text = $request->input('text');
+
+        $report->save();
+
+        return redirect('/reports');
     }
 
     /**
