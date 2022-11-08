@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use Illuminate\Support\Facades\Validator;
+
 
 class ReportController extends Controller
 {
@@ -14,7 +16,9 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('reports.index');
+        $orderedReports = Report::orderBy('created_date', 'desc')->get();
+        $groupedReports = $orderedReports->groupBy('created_date');
+        return view('reports.index', compact('orderedReports','groupedReports'));
     }
 
     /**
@@ -35,6 +39,19 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'temperature' => 'required|numeric',
+            'text' => 'max:100'
+          ];
+
+          $messages = [
+            'required' => '体温は必須項目です',
+            'numeric' => '体温は数値を入力してください。',
+            'max:8' => '入力内容が長すぎます',
+        ];
+
+          Validator::make($request->all(), $rules, $messages)->validate();
+
         $report = new Report;
 
         $report->condition = $request->input('condition');
@@ -55,7 +72,7 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
