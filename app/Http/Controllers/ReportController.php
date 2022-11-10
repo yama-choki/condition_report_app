@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class ReportController extends Controller
@@ -16,9 +18,10 @@ class ReportController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $orderedReports = Report::orderBy('created_date', 'desc')->get();
         $groupedReports = $orderedReports->groupBy('created_date');
-        return view('reports.index', compact('orderedReports','groupedReports'));
+        return view('reports.index', compact('user','groupedReports'));
     }
 
     /**
@@ -40,14 +43,13 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'temperature' => 'required|numeric',
+            'temperature' => 'required|numeric|',
             'text' => 'max:100'
           ];
 
           $messages = [
             'required' => '体温は必須項目です',
             'numeric' => '体温は数値を入力してください。',
-            'max:8' => '入力内容が長すぎます',
         ];
 
           Validator::make($request->all(), $rules, $messages)->validate();
@@ -58,6 +60,7 @@ class ReportController extends Controller
         $report->temperature = $request->input('temperature');
         $report->family = $request->input('family');
         $report->text = $request->input('text');
+        $report->user = $request->input('userName');
 
         $report->save();
 
@@ -72,7 +75,16 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        
+        $selectedReports= Report::where('created_date', '=', $id)->get();
+        $userNames = User::select('name')->get();
+
+        $selectedReportsUsers=[];
+        foreach($selectedReports as $selectedReport){
+            $selectedReportsUsers[] = $selectedReport->user;
+        };
+        // dd($selectedReportsUsers);
+        $isPostedUser = true;
+        return view('reports.show', compact('selectedReports', 'selectedReportsUsers', 'userNames', 'isPostedUser'));
     }
 
     /**

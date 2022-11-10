@@ -14,8 +14,8 @@
             <div class="text-2xl font-bold text-white">
                 体調報告システム
             </div>
-            <div>
-
+            <div class="text-white">
+                {{ $user->name }}
             </div>
         </div>
     </header>
@@ -25,6 +25,9 @@
             @csrf
                 <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md" >
                     <div>
+                    <div>
+                        <input value="{{$user->name}}" type="hidden" name="userName"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
                         <label for="">体調</label><br>
                         <select name="condition" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             <option value="0">異常なし</option>
@@ -62,7 +65,7 @@
                 <ul class="">
                     @foreach ($groupedReports as $reports)
                         <li class>
-                            <a href="/show" class="">
+                            <a href="/reports/{{ $reports[0]->created_date }}" class="">
                                 <div class="hover:bg-indigo-200">
                                     <span href="" class="font-bold text-indigo-600">{{ $reports[0]->created_date }}</span>
                                     <span class="text-sm">　最後の投稿：{{ $reports[0]->created_at }}　{{ $reports[0]->user }}</span>
