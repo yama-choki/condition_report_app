@@ -4,45 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>株式会社クローバーシステムズ：体調管理システム</title>
 
     @vite('resources/css/app.css')
 </head>
 <body>
-    <header class="bg-indigo-500">
-        <div class="container mx-auto">
-            <div class="text-2xl font-bold text-white">
-                体調報告システム
+        <header class="bg-indigo-500 fixed w-full z-10">
+            <div class="container mx-auto flex justify-between">
+                <div class="text-2xl font-bold text-white py-4 px-2">
+                    体調報告システム
+                </div>
+                <div class="text-lg font-bold text-white py-4 px-2">
+                    {{ $loginUser->user_name }}
+                </div>
             </div>
-            <div>
-
-            </div>
-        </div>
-    </header>
+        </header>
     <main>
-        <div class="bg-pink-100 container mx-auto md:flex border-spacing-8">
-            <div>
-                <p>登録社員</p>
-                <ul>
+        <div class="container mx-auto border-spacing-8 md:flex">
+            <div class="md:w-1/4 bg-white p-2 border-2 border-indigo-200 rounded-lg drop-shadow-md">
+                <div class="text-lg font-bold text-center mb-4">社員リスト</div>
+                <ul class="">
                    @foreach ($userNames as $userName)
-                   <li>
-                        @foreach ($selectedReports as $report)
-                            @if ($userName->name == $report->user)
-                                <input type="checkbox" checked>
-                            @else
-                                <input type="checkbox">
-                            @endif
-                        @endforeach
-                        {{ $userName->name }}
-                   </li>
+                   <li class="">
+                       <div class="flex my-1 ">
+                           <div class="w-1/6">
+                                @foreach ($selectedReports as $report)
+                                    @if ($userName->user_name == $report->user)
+                                        <input type="checkbox" checked disabled class="ml-6 mb-0.5">
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div class="font-bold ml-2 md:ml-4">
+                                {{ $userName->user_name }}
+                            </div>
+                       </div>
+                   </li><hr>
                    @endforeach
                 </ul>
             </div>
 
 
-            <div class="bg-indigo-100 p-4 md:w-2/3">
+            <div class="bg-green-300 p-4 md:w-3/4">
                 <p class="font-bold text-xl">投稿履歴</p>
-                {{ $selectedReports }}
                 <ul class="">
                     @foreach ($selectedReports as $report)
                         <li class>

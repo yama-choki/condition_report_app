@@ -18,10 +18,10 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $loginUser = Auth::user();
         $orderedReports = Report::orderBy('created_date', 'desc')->get();
         $groupedReports = $orderedReports->groupBy('created_date');
-        return view('reports.index', compact('user','groupedReports'));
+        return view('reports.index', compact('loginUser','groupedReports'));
     }
 
     /**
@@ -60,7 +60,8 @@ class ReportController extends Controller
         $report->temperature = $request->input('temperature');
         $report->family = $request->input('family');
         $report->text = $request->input('text');
-        $report->user = $request->input('userName');
+        $report->user_name = $request->input('userName');
+        $report->user_id = $request->input('userId');
 
         $report->save();
 
@@ -75,16 +76,15 @@ class ReportController extends Controller
      */
     public function show($id)
     {
+        $loginUser = Auth::user();
         $selectedReports= Report::where('created_date', '=', $id)->get();
-        $userNames = User::select('name')->get();
+        $userNames = User::select('user_name')->get();
 
         $selectedReportsUsers=[];
         foreach($selectedReports as $selectedReport){
             $selectedReportsUsers[] = $selectedReport->user;
         };
-        // dd($selectedReportsUsers);
-        $isPostedUser = true;
-        return view('reports.show', compact('selectedReports', 'selectedReportsUsers', 'userNames', 'isPostedUser'));
+        return view('reports.show', compact('selectedReports', 'selectedReportsUsers', 'userNames', 'loginUser'));
     }
 
     /**
