@@ -25,12 +25,12 @@
             <div class="container mx-auto md:flex border-spacing-8 snap-y">
                 <form action="/reports" method="post" class="md:w-1/3 pt-20 px-2">
                 @csrf
-                    <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md" >
+                    <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md">
                         <div>
-                        <div>
-                            <input value="{{$loginUser->user_name}}" type="hidden" name="userName"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
+                            <div>
+                                <input value="{{$loginUser->user_name}}" type="hidden" name="userName"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
                             <label for="">体調</label><br>
                             <select name="condition" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <option value="0" {{ $latestReport[0]->condition === 0 ? 'selected' : ''; }}>異常なし</option>
@@ -63,7 +63,6 @@
 
                 <div class="p-4 md:w-2/3 md:mt-20">
                     <p class="font-bold text-lg opacity-100">投稿履歴</p>
-                    <div class="bg-scroll"></div>
                     <ul class="overflow-y-auto">
                         @foreach ($groupedReports as $reports)
                             <li class="bg-white mb-2 p-2 rounded-md shadow-md border-2 border-indigo-300 hover:bg-indigo-100">

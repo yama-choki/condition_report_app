@@ -50,8 +50,20 @@
                     <ul class="">
                         @foreach ($selectedReports as $report)
                             <li class="bg-white mb-2 p-2 rounded-md shadow-md border-2 border-indigo-300">
-                                <span class="font-bold text-indigo-500">{{$report->user_name}}　</span>
-                                <span class="text-sm">{{$report->created_at}}</span>
+                                <div class="flex justify-between">
+                                    <div>
+                                        <span class="font-bold text-indigo-500">{{$report->user_name}}　</span>
+                                        <span class="text-sm">{{$report->created_at}}</span>
+                                    </div>
+                                    <form onsubmit="return deleteReport();"
+                                        action="/reports/{{ $report->id }}" method="post"
+                                        class="inline-block text-white text-sm"
+                                        role="menuitem" tabindex="-1">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-indigo-500 rounded-md p-1 hover:bg-indigo-600">削除</button>
+                                    </form>
+                                </div>
                                 <p class="text-sm">
                                     @if($report->condition === 0)
                                     <span>体調：異常なし　</span>
@@ -101,4 +113,13 @@
 
     </div>
 </body>
+<script>
+    function deleteTask() {
+        if (confirm('本当に削除しますか？')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 </html>
