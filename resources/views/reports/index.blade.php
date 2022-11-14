@@ -33,10 +33,10 @@
                         </div>
                             <label for="">体調</label><br>
                             <select name="condition" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                <option value="0">異常なし</option>
-                                <option value="1">咳、くしゃみ</option>
-                                <option value="2">発熱</option>
-                                <option value="3">その他</option>
+                                <option value="0" {{ $latestReport[0]->condition === 0 ? 'selected' : ''; }}>異常なし</option>
+                                <option value="1" {{ $latestReport[0]->condition === 1 ? 'selected' : ''; }}>咳、くしゃみ</option>
+                                <option value="2" {{ $latestReport[0]->condition === 2 ? 'selected' : ''; }}>発熱</option>
+                                <option value="3" {{ $latestReport[0]->condition === 3 ? 'selected' : ''; }}>その他</option>
                             </select>
                         </div>
                         <div>
@@ -46,15 +46,15 @@
                         <div>
                             <label for="">家族等</label><br>
                             <select name="family" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                <option value="0">--</option>
-                                <option value="1">異常なし</option>
-                                <option value="2">同居人が体調不良</option>
-                                <option value="3">親戚等が体調不良</option>
+                                <option value="0" {{ $latestReport[0]->family === 0 ? 'selected' : ''; }}>--</option>
+                                <option value="1" {{ $latestReport[0]->family === 1 ? 'selected' : ''; }}>異常なし</option>
+                                <option value="2" {{ $latestReport[0]->family === 2 ? 'selected' : ''; }}>同居人が体調不良</option>
+                                <option value="3" {{ $latestReport[0]->family === 3 ? 'selected' : ''; }}>親戚等が体調不良</option>
                             </select>
                         </div>
                         <div class="">
                             <label for="">その他</label><br>
-                            <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"></textarea>
+                            <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{  $latestReport[0]->text }}</textarea>
                         </div>
                         <button class="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded">報告する</button>
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -62,7 +62,7 @@
                 </form>
 
                 <div class="p-4 md:w-2/3 md:mt-20">
-                    <p class="font-bold text-lg">投稿履歴</p>
+                    <p class="font-bold text-lg opacity-100">投稿履歴</p>
                     <div class="bg-scroll"></div>
                     <ul class="overflow-y-auto">
                         @foreach ($groupedReports as $reports)
