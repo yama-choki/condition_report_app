@@ -82,7 +82,7 @@ class ReportController extends Controller
     {
         $loginUser = Auth::user();
         $selectedReports= Report::where('created_date', '=', $id)->get();
-        $userNames = User::select('user_name')->get();
+        $userNames = User::select('name')->get();
 
         $selectedReportsUsers=[];
         foreach($selectedReports as $selectedReport){

@@ -16,7 +16,7 @@
                     体調報告システム
                 </div>
                 <div class="text-lg font-bold text-white py-4 px-2">
-                    {{ $loginUser->user_name }}
+                    {{ $loginUser->name }}
                 </div>
             </div>
         </header>

@@ -16,7 +16,7 @@
                     体調報告システム
                 </div>
                 <div class="text-lg font-bold text-white py-4 px-2">
-                    {{ $loginUser->user_name }}
+                    {{ $loginUser->name }}
                 </div>
             </div>
         </header>
@@ -31,13 +31,13 @@
                            <div class="flex my-1 ">
                                <div class="w-1/6">
                                     @foreach ($selectedReports as $report)
-                                        @if ($userName->user_name == $report->user_name)
+                                        @if ($userName->name == $report->user_name)
                                             <input type="checkbox" checked disabled class="ml-6 mb-0.5">
                                         @endif
                                     @endforeach
                                 </div>
                                 <div class="font-bold ml-2 md:ml-4">
-                                    {{ $userName->user_name }}
+                                    {{ $userName->name }}
                                 </div>
                            </div>
                        </li><hr>
