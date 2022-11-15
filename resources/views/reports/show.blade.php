@@ -116,7 +116,7 @@
     </div>
 </body>
 <script>
-    function deleteTask() {
+    function deleteReport() {
         if (confirm('本当に削除しますか？')) {
             return true;
         } else {
