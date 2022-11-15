@@ -25,19 +25,28 @@
             <div class="container mx-auto md:flex border-spacing-8 snap-y">
                 <form action="/reports" method="post" class="md:w-1/3 pt-20 px-2">
                 @csrf
-                    <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md">
+                    <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md" >
                         <div>
                             <div>
                                 <input value="{{$loginUser->user_name}}" type="hidden" name="userName"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
                             <label for="">体調</label><br>
+                            @if (!isset($latestReport[0]))
+                            <select name="condition" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <option value="0">異常なし</option>
+                                <option value="1">咳、くしゃみ</option>
+                                <option value="2">発熱</option>
+                                <option value="3">その他</option>
+                            </select>
+                            @else
                             <select name="condition" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <option value="0" {{ $latestReport[0]->condition === 0 ? 'selected' : ''; }}>異常なし</option>
                                 <option value="1" {{ $latestReport[0]->condition === 1 ? 'selected' : ''; }}>咳、くしゃみ</option>
                                 <option value="2" {{ $latestReport[0]->condition === 2 ? 'selected' : ''; }}>発熱</option>
                                 <option value="3" {{ $latestReport[0]->condition === 3 ? 'selected' : ''; }}>その他</option>
                             </select>
+                            @endif
                         </div>
                         <div>
                             <label for="">体温</label><br>
@@ -45,18 +54,39 @@
                         </div>
                         <div>
                             <label for="">家族等</label><br>
+                            @if (!isset($latestReport[0]))
+                            <select name="family" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <option value="0">--</option>
+                                <option value="1">異常なし</option>
+                                <option value="2">同居人が体調不良</option>
+                                <option value="3">親戚等が体調不良</option>
+                            </select>
+                            @else
                             <select name="family" id="" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <option value="0" {{ $latestReport[0]->family === 0 ? 'selected' : ''; }}>--</option>
                                 <option value="1" {{ $latestReport[0]->family === 1 ? 'selected' : ''; }}>異常なし</option>
                                 <option value="2" {{ $latestReport[0]->family === 2 ? 'selected' : ''; }}>同居人が体調不良</option>
                                 <option value="3" {{ $latestReport[0]->family === 3 ? 'selected' : ''; }}>親戚等が体調不良</option>
                             </select>
+                            @endif
+
                         </div>
                         <div class="">
                             <label for="">その他</label><br>
-                            <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{  $latestReport[0]->text }}</textarea>
+                            <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"></textarea>
                         </div>
-                        <button class="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded">報告する</button>
+                        @php
+                        $date= date("Y-m-d");
+                        @endphp
+                        @if (isset($latestReport[0]))
+                            @if ($latestReport[0]->created_date === $date)
+                                <div class="text-indigo-500">本日は既に報告しています。</div>
+                            @else
+                                <button class="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded">報告する</button>
+                            @endif
+                        @else
+                            <button class="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded">報告する</button>
+                        @endif
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     </div>
                 </form>
@@ -66,10 +96,23 @@
                     <ul class="overflow-y-auto">
                         @foreach ($groupedReports as $reports)
                             <li class="bg-white mb-2 p-2 rounded-md shadow-md border-2 border-indigo-300 hover:bg-indigo-100">
-                                <a href="/reports/{{ $reports[0]->created_date }}" class="">
+                                <a href="/reports/{{ $reports[0]->created_date }}">
                                     <div class="">
-                                        <span href="" class="font-bold text-indigo-600">{{ $reports[0]->created_date }}</span>
-                                        <span class="text-sm">　最後の投稿：{{ $reports[0]->created_at }}　{{ $reports[0]->user }}</span>
+                                        <div class="flex">
+                                            <div class="font-bold text-indigo-600">
+                                                {{ $reports[0]->created_date }}
+                                            </div>
+                                            <div class="text-sm pt-0.5">
+                                                　最後の投稿：
+                                                <span class="font-bold">
+                                                    {{ $reports[0]->user_name }}　
+                                                </span>
+                                                <span>
+                                                    {{ $reports[0]->created_at }}
+                                                </span>
+                                            </div>
+
+                                        </div>
                                         <p class="text-sm">
                                             @if($reports[0]->condition === 0)
                                             <span>体調：異常なし　</span>
