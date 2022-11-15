@@ -22,7 +22,7 @@
         </header>
 
         <main>
-            <div class="container mx-auto md:flex border-spacing-8 snap-y">
+            <div class="container mx-auto md:flex border-spacing-8 snap-y h-screen">
                 <form action="/reports" method="post" class="md:w-1/3 pt-20 px-2">
                 @csrf
                     <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md" >
@@ -91,7 +91,7 @@
                     </div>
                 </form>
 
-                <div class="p-4 md:w-2/3 md:mt-20">
+                <div class="p-4 md:w-2/3 md:mt-20 overflow-auto h-4/5">
                     <p class="font-bold text-lg opacity-100">投稿履歴</p>
                     <ul class="overflow-y-auto">
                         @foreach ($groupedReports as $reports)
