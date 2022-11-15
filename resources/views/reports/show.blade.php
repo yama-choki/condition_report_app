@@ -43,7 +43,7 @@
                        </li><hr>
                        @endforeach
                     </ul>
-                </div>condition
+                </div>
 
                 <div class="p-4 md:w-3/4">
                     <p class="font-bold text-xl">投稿履歴</p>
