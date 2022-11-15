@@ -24,4 +24,4 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('reports', reportController::class)->middleware(['auth']);
+Route::middleware(['auth'])->resource('reports', reportController::class);
