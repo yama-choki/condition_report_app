@@ -103,11 +103,11 @@
                                             </div>
                                             <div class="text-sm pt-0.5">
                                                 　最後の投稿：
-                                                <span class="font-bold">
-                                                    {{ $reports[0]->user_name }}　
+                                                <span class="">
+                                                    {{ $reports[0]->created_at->format('H:i') }}　
                                                 </span>
-                                                <span>
-                                                    {{ $reports[0]->created_at }}
+                                                <span class="font-bold">
+                                                    {{ $reports[0]->user_name }}
                                                 </span>
                                             </div>
 

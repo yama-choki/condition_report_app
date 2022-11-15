@@ -53,7 +53,7 @@
                                 <div class="flex justify-between">
                                     <div>
                                         <span class="font-bold text-indigo-500">{{$report->user_name}}　</span>
-                                        <span class="text-sm">{{$report->created_at}}</span>
+                                        <span class="text-sm">{{$report->created_at->format('H:i')}}</span>
                                     </div>
                                     @if ($loginUser->id === $report->user_id)
                                         <form onsubmit="return deleteReport();"
