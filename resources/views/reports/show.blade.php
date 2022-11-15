@@ -43,7 +43,7 @@
                        </li><hr>
                        @endforeach
                     </ul>
-                </div>
+                </div>condition
 
                 <div class="p-4 md:w-3/4">
                     <p class="font-bold text-xl">投稿履歴</p>
@@ -55,14 +55,16 @@
                                         <span class="font-bold text-indigo-500">{{$report->user_name}}　</span>
                                         <span class="text-sm">{{$report->created_at}}</span>
                                     </div>
-                                    <form onsubmit="return deleteReport();"
-                                        action="/reports/{{ $report->id }}" method="post"
-                                        class="inline-block text-white text-sm"
-                                        role="menuitem" tabindex="-1">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="bg-indigo-500 rounded-md p-1 hover:bg-indigo-600">削除</button>
-                                    </form>
+                                    @if ($loginUser->id === $report->user_id)
+                                        <form onsubmit="return deleteReport();"
+                                            action="/reports/{{ $report->id }}" method="post"
+                                            class="inline-block text-white text-sm"
+                                            role="menuitem" tabindex="-1">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-indigo-500 rounded-md p-1 hover:bg-indigo-600">削除</button>
+                                        </form>
+                                    @endif
                                 </div>
                                 <p class="text-sm">
                                     @if($report->condition === 0)
