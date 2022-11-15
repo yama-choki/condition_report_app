@@ -18,7 +18,6 @@
                 <div class="text-lg font-bold text-white py-4 px-2">
                     {{ $loginUser->name }}
                 </div>
-            </div>
         </header>
 
         <main>
