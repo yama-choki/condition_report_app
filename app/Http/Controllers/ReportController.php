@@ -23,7 +23,7 @@ class ReportController extends Controller
         $loginUserId = $loginUser->id;
         $orderedReports = Report::latest()->get();
         $groupedReports = $orderedReports->groupBy('created_date');
-        $latestReport = Report::where('id', '=', $loginUserId)->latest()->limit(1)->get();
+        $latestReport = Report::where('user_id', '=', $loginUserId)->latest()->limit(1)->get();
 
         // dd($loginUser,$loginUserId,$groupedReports,$latestReport);
         return view('reports.index', compact('loginUser','groupedReports','latestReport'));

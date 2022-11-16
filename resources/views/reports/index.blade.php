@@ -54,7 +54,6 @@
                             <div>
                                 <input value="{{$loginUser->name}}" type="hidden" name="name"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
                             <label for="">体調</label><br>
                             @if (!isset($latestReport[0]))
@@ -101,7 +100,7 @@
                             <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="100文字以下で入力してください">{{ old('text') }}</textarea>
                         </div>
                         @php
-                        $date= date("Y-m-d");
+                        $date= date('Y-m-d');
                         @endphp
                         @if (isset($latestReport[0]))
                             @if ($latestReport[0]->created_date === $date)
