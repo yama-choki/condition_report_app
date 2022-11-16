@@ -60,7 +60,6 @@ class ReportController extends Controller
           Validator::make($request->all(), $rules, $messages)->validate();
 
         $report = new Report;
-        $mytime = Carbon\Carbon::now();
 
         $report->condition = $request->input('condition');
         $report->temperature = $request->input('temperature');
@@ -68,7 +67,7 @@ class ReportController extends Controller
         $report->text = $request->input('text');
         $report->user_name = $request->input('name');
         $report->user_id = $request->input('userId');
-        $report->created_date = $mytime->toDateTimeString('Y-m-d');
+        $report->created_date = date('Y-m-d');
 
         $report->save();
 
