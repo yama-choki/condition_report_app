@@ -54,6 +54,7 @@
                             <div>
                                 <input value="{{$loginUser->name}}" type="hidden" name="name"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
                             <label for="">体調</label><br>
                             @if (!isset($latestReport[0]))
