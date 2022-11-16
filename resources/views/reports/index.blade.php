@@ -47,7 +47,7 @@
 
         <main>
             <div class="container mx-auto md:flex border-spacing-8 snap-y h-screen">
-                <form action="/reports" method="post" class="md:w-1/3 pt-20 px-2">
+                <form action="{{ route('reports.index') }}" method="post" class="md:w-1/3 pt-20 px-2">
                 @csrf
                     <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md" >
                         <div>
