@@ -24,4 +24,14 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth'])->resource('reports', reportController::class);
+// Route::middleware(['auth'])->resource('reports', reportController::class);
+Route::prefix('reports')
+->middleware(['auth'])
+->controller(ReportController::class)
+->name('reports.')
+->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{id}', 'show')->name('show');
+    Route::post('/{id}/destroy', 'destroy')->name('destroy');
+});

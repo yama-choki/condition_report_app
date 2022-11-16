@@ -47,7 +47,7 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'temperature' => 'required|numeric|',
+            'temperature' => 'required|numeric|max:40',
             'text' => 'max:100'
           ];
 
@@ -64,12 +64,12 @@ class ReportController extends Controller
         $report->temperature = $request->input('temperature');
         $report->family = $request->input('family');
         $report->text = $request->input('text');
-        $report->user_name = $request->input('userName');
+        $report->user_name = $request->input('name');
         $report->user_id = $request->input('userId');
 
         $report->save();
 
-        return redirect('/reports');
+        return to_route('reports.index');
     }
 
     /**
@@ -124,6 +124,6 @@ class ReportController extends Controller
     {
         Report::find($id)->delete();
 
-        return redirect('/reports');
+        return to_route('reports.index');
     }
 }

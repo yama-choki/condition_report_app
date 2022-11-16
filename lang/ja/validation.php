@@ -154,7 +154,8 @@ return [
     */
 
     'attributes' => [
-        'text' => 'その他'
+        'text' => 'その他',
+        'temperature' => '体温'
     ],
 
 ];

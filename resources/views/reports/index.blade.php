@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>株式会社クローバーシステムズ：体調管理システム</title>
 
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div class="bg-backgroundImage min-h-screen bg-cover">
@@ -15,8 +15,33 @@
                 <div class="text-2xl font-bold text-white py-4 px-2">
                     体調報告システム
                 </div>
-                <div class="text-lg font-bold text-white py-4 px-2">
-                    {{ $loginUser->name }}
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="flex items-center text-sm font-medium text-white hover:text-gray-200 hover:border-gray-200 focus:outline-none focus:text-gray-400 focus:border-gray-300 transition duration-150 ease-in-out">
+                                <div>{{ $loginUser->name }}</div>
+
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('ログアウト') }}
+                                </x-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
                 </div>
         </header>
 
@@ -27,7 +52,7 @@
                     <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md" >
                         <div>
                             <div>
-                                <input value="{{$loginUser->user_name}}" type="hidden" name="userName"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <input value="{{$loginUser->name}}" type="hidden" name="name"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <input value="{{$loginUser->id}}" type="hidden" name="userId"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
                             <label for="">体調</label><br>
@@ -49,7 +74,7 @@
                         </div>
                         <div>
                             <label for="">体温</label><br>
-                            <input type="text" name="temperature"class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            <input type="text" name="temperature" placeholder="（例）36.5" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                         <div>
                             <label for="">家族等</label><br>
@@ -72,7 +97,7 @@
                         </div>
                         <div class="">
                             <label for="">その他</label><br>
-                            <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"></textarea>
+                            <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="100文字以下で入力してください">{{ old('text') }}</textarea>
                         </div>
                         @php
                         $date= date("Y-m-d");
@@ -95,7 +120,7 @@
                     <ul class="overflow-y-auto">
                         @foreach ($groupedReports as $reports)
                             <li class="bg-white mb-2 p-2 rounded-md shadow-md border-2 border-indigo-300 hover:bg-indigo-100">
-                                <a href="/reports/{{ $reports[0]->created_date }}">
+                                <a href="{{ route('reports.show',[ 'id' => $reports[0]->created_date ]); }}">
                                     <div class="">
                                         <div class="flex">
                                             <div class="font-bold text-indigo-600">
@@ -146,6 +171,7 @@
                                 </a>
                             </li>
                         @endforeach
+                        <div class="h-8 md:hidden"></div>
                     </ul>
                 </div>
 
