@@ -8,8 +8,8 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <div class="bg-backgroundImage min-h-screen bg-cover">
+<body class="bg-green-300">
+    <div>
         <header class="bg-indigo-500 fixed w-full z-10">
             <div class="container mx-auto flex justify-between">
                 <div class="text-2xl font-bold text-white py-4 px-2">
