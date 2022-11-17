@@ -41,10 +41,10 @@
             </div> -->
 
             <div class="flex items-center justify-end mt-4">
-                <a href="{{ route('register') }}" class="mx-4 text-sm text-gray-700 dark:text-gray-500 underline">新規登録の場合</a>
+                <a href="{{ route('register') }}" class="mx-4 text-sm text-gray-700 dark:text-gray-500 underline">新規登録</a>
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        パスワードをお忘れの場合
+                        パスワードを忘れた
                     </a>
                 @endif
 
