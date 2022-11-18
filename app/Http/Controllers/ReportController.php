@@ -62,7 +62,8 @@ class ReportController extends Controller
         $report = new Report;
 
         $report->condition = $request->input('condition');
-        $report->temperature = $request->input('temperature');
+        $temperature = $request->input('temperature');
+        $report->temperature = round($temperature, 1);
         $report->family = $request->input('family');
         $report->text = $request->input('text');
         $report->user_name = $request->input('name');
