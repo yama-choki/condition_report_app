@@ -89,9 +89,9 @@
         </header>
 
         <main>
-            <div class="container mx-auto md:flex border-spacing-8 snap-y h-screen">
+            <div class="container mx-auto border-spacing-8 snap-y h-screen md:flex">
                 <form action="{{ route('reports.index') }}" method="post" class="md:w-1/3 pt-20 px-2">
-                @csrf
+                    @csrf
                     <div class="bg-white p-2 border-2 border-indigo-100 rounded-lg drop-shadow-md" >
                         <div>
                             <div>
@@ -138,8 +138,10 @@
                             @endif
 
                         </div>
-                        <div class="">
-                            <label for="">その他</label> <span id="inputlength" class="text-xs text-gray-800"></span><br>
+                        <div>
+                            <div class="flex justify-between">
+                                <label for="">その他</label> <span id="inputlength" class="text-xs text-gray-800"></span>
+                            </div>
                             <textarea name="text" id="" cols="30" onkeyup="ShowLength(value);" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="100文字以下で入力してください">{{ old('text') }}</textarea>
                         </div>
                         @php

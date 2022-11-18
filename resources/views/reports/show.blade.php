@@ -90,32 +90,33 @@
         </header>
 
         <main>
-            <div class="container mx-auto border-spacing-8 md:flex pt-20 px-2">
-                <div class="md:w-1/4 bg-white p-2 border-2 border-indigo-200 rounded-lg drop-shadow-md">
+            <div class="main-box container mx-auto border-spacing-8 pt-20 px-2 md:flex">
+                <div class="membar-list md:w-1/4 bg-white p-2 border-2 border-indigo-200 rounded-lg drop-shadow-md">
                     <div class="text-lg font-bold text-center mb-4">社員リスト</div>
-                    <ul class="h-auto">
-                       @foreach ($userNames as $userName)
-                       <li class="">
-                           <div class="flex my-1 ">
-                               <div class="w-1/6">
-                                    @foreach ($selectedReports as $report)
-                                        @if ($userName->name == $report->user_name)
-                                            <input type="checkbox" checked disabled class="ml-6 mb-0.5">
-                                        @endif
-                                    @endforeach
+                        <ul>
+                            @foreach ($userNames as $userName)
+                            <li>
+                                <div class="flex my-1 ">
+                                    <div class="w-1/6">
+                                        @foreach ($selectedReports as $report)
+                                            @if ($userName->name == $report->user_name)
+                                                <input type="checkbox" checked disabled class="ml-6 mb-0.5">
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="font-bold ml-2 md:ml-4">
+                                        {{ $userName->name }}
+                                    </div>
                                 </div>
-                                <div class="font-bold ml-2 md:ml-4">
-                                    {{ $userName->name }}
-                                </div>
-                           </div>
-                       </li><hr>
-                       @endforeach
-                    </ul>
+                            </li><hr>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="p-2 md:w-3/4">
+                <div class="reports-list p-2 md:w-3/4">
                     <p class="font-bold text-xl">投稿履歴</p>
-                    <ul class="">
+                    <ul>
                         @foreach ($selectedReports as $report)
                             <li class="bg-white mb-2 p-2 rounded-md shadow-md border-2 border-indigo-300">
                                 <div class="flex justify-between">
@@ -134,42 +135,40 @@
                                         </form>
                                     @endif
                                 </div>
-                                <div class="flex text-sm"">
-                                    <div>
+                                <div class="flex text-sm">
+                                    <div class="condition-box">
                                         <span class="font-bold text-gray-700">体調：</span>
                                         @if($report->condition === 0)異常なし　@endif
                                         @if($report->condition === 1)咳、くしゃみ　@endif
                                         @if($report->condition === 2)発熱　@endif
                                         @if($report->condition === 3)その他　@endif
                                     </div>
-                                    <div>
+                                    <div class="family-box">
                                         <span class="font-bold text-gray-700">家族：</span>
                                         @if($report->family === 0)ーー　@endif
                                         @if($report->family === 1)異常なし　@endif
                                         @if($report->family === 2)同居人が体調不良　@endif
                                         @if($report->family === 3)親戚等が体調不良　@endif
                                     </div>
-                                    <div class="max-[450px]:hidden">
+                                    <div class="max-[450px]:hidden temperature">
                                         <span class="font-bold text-gray-700">体温：</span>
                                         {{ $report->temperature }}℃
                                     </div>
-                                    </div>
-                                    <div class="min-[449px]:hidden text-sm"">
-                                        <span class="font-bold text-gray-700">体温：</span>
-                                        {{ $report->temperature }}℃
-                                    </div>
-                                    @if($report->text)
+                                </div>
+                                <div class="min-[449px]:hidden temperature">
+                                    <span class="font-bold text-gray-700">体温：</span>
+                                    {{ $report->temperature }}℃
+                                </div>
+                                @if($report->text)
                                     <div class="text-sm w-full">
                                         <span class="font-bold text-gray-700">その他:</span>
-                                        {{ $report->text }}</div>
-                                    @endif
-                                </div>
+                                        {{ $report->text }}
+                                    </div>
+                                @endif
                             </li>
                         @endforeach
-                        <div class="h-8  md:hidden"></div>
                     </ul>
                 </div>
-
             </div>
         </main>
 
@@ -180,7 +179,6 @@
                     </div>
                 </div>
         </footer>
-
     </div>
 </body>
 <script>
