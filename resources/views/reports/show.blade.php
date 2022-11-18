@@ -93,25 +93,24 @@
             <div class="main-box container mx-auto border-spacing-8 pt-20 px-2 md:flex">
                 <div class="membar-list md:w-1/4 bg-white p-2 border-2 border-indigo-200 rounded-lg drop-shadow-md">
                     <div class="text-lg font-bold text-center mb-4">社員リスト</div>
-                        <ul>
-                            @foreach ($userNames as $userName)
-                            <li>
-                                <div class="flex my-1 ">
-                                    <div class="w-1/6">
-                                        @foreach ($selectedReports as $report)
-                                            @if ($userName->name == $report->user_name)
-                                                <input type="checkbox" checked disabled class="ml-6 mb-0.5">
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <div class="font-bold ml-2 md:ml-4">
-                                        {{ $userName->name }}
-                                    </div>
+                    <ul>
+                        @foreach ($userNames as $userName)
+                        <li>
+                            <div class="flex my-1 ">
+                                <div class="w-1/6">
+                                    @foreach ($selectedReports as $report)
+                                        @if ($userName->name == $report->user_name)
+                                            <input type="checkbox" checked disabled class="ml-6 mb-0.5">
+                                        @endif
+                                    @endforeach
                                 </div>
-                            </li><hr>
-                            @endforeach
-                        </ul>
-                    </div>
+                                <div class="font-bold ml-2 md:ml-4">
+                                    {{ $userName->name }}
+                                </div>
+                            </div>
+                        </li><hr>
+                        @endforeach
+                    </ul>
                 </div>
 
                 <div class="reports-list p-2 md:w-3/4">
