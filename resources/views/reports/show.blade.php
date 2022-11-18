@@ -113,7 +113,7 @@
                     </ul>
                 </div>
 
-                <div class="p-4 md:w-3/4">
+                <div class="p-2 md:w-3/4">
                     <p class="font-bold text-xl">投稿履歴</p>
                     <ul class="">
                         @foreach ($selectedReports as $report)
@@ -134,37 +134,36 @@
                                         </form>
                                     @endif
                                 </div>
-                                <p class="text-sm">
-                                    @if($report->condition === 0)
-                                    <span>体調：異常なし　</span>
+                                <div class="flex text-sm"">
+                                    <div>
+                                        <span class="font-bold text-gray-700">体調：</span>
+                                        @if($report->condition === 0)異常なし　@endif
+                                        @if($report->condition === 1)咳、くしゃみ　@endif
+                                        @if($report->condition === 2)発熱　@endif
+                                        @if($report->condition === 3)その他　@endif
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-gray-700">家族：</span>
+                                        @if($report->family === 0)ーー　@endif
+                                        @if($report->family === 1)異常なし　@endif
+                                        @if($report->family === 2)同居人が体調不良　@endif
+                                        @if($report->family === 3)親戚等が体調不良　@endif
+                                    </div>
+                                    <div class="max-[450px]:hidden">
+                                        <span class="font-bold text-gray-700">体温：</span>
+                                        {{ $report->temperature }}℃
+                                    </div>
+                                    </div>
+                                    <div class="min-[449px]:hidden text-sm"">
+                                        <span class="font-bold text-gray-700">体温：</span>
+                                        {{ $report->temperature }}℃
+                                    </div>
+                                    @if($report->text)
+                                    <div class="text-sm w-full">
+                                        <span class="font-bold text-gray-700">その他:</span>
+                                        {{ $report->text }}</div>
                                     @endif
-                                    @if($report->condition === 1)
-                                    <span>体調：咳、くしゃみ　</span>
-                                    @endif
-                                    @if($report->condition === 2)
-                                    <span>体調：発熱　</span>
-                                    @endif
-                                    @if($report->condition === 3)
-                                    <span>体調：その他　</span>
-                                    @endif
-
-                                    @if($report->family === 0)
-                                    <span>家族：ーー　</span>
-                                    @endif
-                                    @if($report->family === 1)
-                                    <span>家族：異常なし　</span>
-                                    @endif
-                                    @if($report->family === 2)
-                                    <span>家族：同居人が体調不良　</span>
-                                    @endif
-                                    @if($report->family === 3)
-                                    <span>家族：親戚等が体調不良　</span>
-                                    @endif
-                                    <span>体温：{{ $report->temperature }}℃</span>
-                                </p>
-                                @if($report->text)
-                                    <div class="text-sm w-full">その他：{{ $report->text }}</div>
-                                @endif
+                                </div>
                             </li>
                         @endforeach
                         <div class="h-8  md:hidden"></div>

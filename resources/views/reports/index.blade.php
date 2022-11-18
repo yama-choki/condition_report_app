@@ -158,57 +158,46 @@
                     </div>
                 </form>
 
-                <div class="p-4 md:w-2/3 md:mt-20 overflow-auto h-4/5">
+                <div class="p-2 md:w-2/3 md:mt-20 overflow-auto h-4/5">
                     <p class="font-bold text-lg opacity-100">投稿履歴</p>
                     <ul class="overflow-y-auto">
                         @foreach ($groupedReports as $reports)
                             <li class="bg-white mb-2 p-2 rounded-md shadow-md border-2 border-indigo-300 hover:bg-indigo-100">
                                 <a href="{{ route('reports.show',[ 'id' => $reports[0]->created_date ]); }}">
-                                    <div class="">
-                                        <div class="flex">
-                                            <div class="font-bold text-indigo-600">
-                                                {{ $reports[0]->created_date }}
-                                            </div>
-                                            <div class="text-sm pt-0.5">
-                                                　最後の投稿：
-                                                <span class="">
-                                                    {{ $reports[0]->created_at->format('H:i') }}　
-                                                </span>
-                                                <span class="font-bold">
-                                                    {{ $reports[0]->user_name }}
-                                                </span>
-                                            </div>
-
+                                    <div>
+                                        <div class="flex justify-between">
+                                            <div class="font-bold text-indigo-500 w-1/3">{{ $reports[0]->created_date }}</div>
+                                            <div class="text-sm pt-1">{{ $reports[0]->created_at->format('H:i') }}</div>
                                         </div>
-                                        <p class="text-sm">
-                                            @if($reports[0]->condition === 0)
-                                            <span>体調：異常なし　</span>
-                                            @endif
-                                            @if($reports[0]->condition === 1)
-                                            <span>体調：咳、くしゃみ　</span>
-                                            @endif
-                                            @if($reports[0]->condition === 2)
-                                            <span>体調：発熱　</span>
-                                            @endif
-                                            @if($reports[0]->condition === 3)
-                                            <span>体調：その他　</span>
-                                            @endif
-                                            @if($reports[0]->family === 0)
-                                            <span>家族：ーー　</span>
-                                            @endif
-                                            @if($reports[0]->family === 1)
-                                            <span>家族：異常なし　</span>
-                                            @endif
-                                            @if($reports[0]->family === 2)
-                                            <span>家族：同居人が体調不良　</span>
-                                            @endif
-                                            @if($reports[0]->family === 3)
-                                            <span>家族：親戚等が体調不良　</span>
-                                            @endif
-                                            <span>体温：{{ $reports[0]->temperature }}℃</span>
-                                        </p>
+                                        <div class="font-bold">{{ $reports[0]->user_name }}</div>
+                                        <div class="flex text-sm"">
+                                            <div>
+                                                <span class="font-bold text-gray-700">体調：</span>
+                                                @if($reports[0]->condition === 0)異常なし　@endif
+                                                @if($reports[0]->condition === 1)咳、くしゃみ　@endif
+                                                @if($reports[0]->condition === 2)発熱　@endif
+                                                @if($reports[0]->condition === 3)その他　@endif
+                                            </div>
+                                            <div>
+                                                <span class="font-bold text-gray-700">家族：</span>
+                                                @if($reports[0]->family === 0)ーー　@endif
+                                                @if($reports[0]->family === 1)異常なし　@endif
+                                                @if($reports[0]->family === 2)同居人が体調不良　@endif
+                                                @if($reports[0]->family === 3)親戚等が体調不良　@endif
+                                            </div>
+                                            <div class="max-[430px]:hidden">
+                                                <span class="font-bold text-gray-700">体温：</span>
+                                                {{ $reports[0]->temperature }}℃
+                                            </div>
+                                        </div>
+                                        <div class="min-[429px]:hidden text-sm"">
+                                            <span class="font-bold text-gray-700">体温：</span>
+                                            {{ $reports[0]->temperature }}℃
+                                        </div>
                                         @if($reports[0]->text)
-                                        <div class="text-sm w-full">その他：{{ $reports[0]->text }}</div>
+                                        <div class="text-sm w-full">
+                                            <span class="font-bold text-gray-700">その他:</span>
+                                            {{ $reports[0]->text }}</div>
                                         @endif
                                     </div>
                                 </a>
