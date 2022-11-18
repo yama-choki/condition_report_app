@@ -139,8 +139,8 @@
 
                         </div>
                         <div class="">
-                            <label for="">その他</label><br>
-                            <textarea name="text" id="" cols="30" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="100文字以下で入力してください">{{ old('text') }}</textarea>
+                            <label for="">その他</label> <span id="inputlength" class="text-xs text-gray-800"></span><br>
+                            <textarea name="text" id="" cols="30" onkeyup="ShowLength(value);" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="100文字以下で入力してください">{{ old('text') }}</textarea>
                         </div>
                         @php
                         $date= date('Y-m-d');
@@ -170,7 +170,7 @@
                                             <div class="text-sm pt-1">{{ $reports[0]->created_at->format('H:i') }}</div>
                                         </div>
                                         <div class="font-bold">{{ $reports[0]->user_name }}</div>
-                                        <div class="flex text-sm"">
+                                        <div class="flex text-sm">
                                             <div>
                                                 <span class="font-bold text-gray-700">体調：</span>
                                                 @if($reports[0]->condition === 0)異常なし　@endif
@@ -190,7 +190,7 @@
                                                 {{ $reports[0]->temperature }}℃
                                             </div>
                                         </div>
-                                        <div class="min-[429px]:hidden text-sm"">
+                                        <div class="min-[429px]:hidden text-sm">
                                             <span class="font-bold text-gray-700">体温：</span>
                                             {{ $reports[0]->temperature }}℃
                                         </div>
@@ -218,4 +218,9 @@
         </footer>
     </div>
 </body>
+<script>
+    function ShowLength( str ) {
+       document.getElementById("inputlength").innerHTML = str.length + "/100";
+    }
+</script>
 </html>
