@@ -155,7 +155,10 @@ return [
 
     'attributes' => [
         'text' => 'その他',
-        'temperature' => '体温'
+        'temperature' => '体温',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'name' => 'ユーザー名',
     ],
 
 ];
