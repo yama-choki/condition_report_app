@@ -91,7 +91,7 @@
 
         <main>
             <div class="main-box container mx-auto border-spacing-8 pt-20 px-2 md:flex">
-                <div class="membar-list md:w-1/4 bg-white p-2 border-2 border-indigo-200 rounded-lg drop-shadow-md">
+                <div class="md:w-1/4 bg-white p-2 border-2 border-indigo-200 rounded-lg drop-shadow-md" style="max-height:360px">
                     <div class="text-lg font-bold text-center mb-4">社員リスト</div>
                     <ul>
                         @foreach ($userNames as $userName)
@@ -113,9 +113,9 @@
                     </ul>
                 </div>
 
-                <div class="reports-list p-2 md:w-3/4">
-                    <p class="font-bold text-xl">投稿履歴</p>
-                    <ul>
+                <div class="p-2 md:w-3/4 overflow-auto">
+                    <p class="font-bold text-xl">投稿履歴:{{ $day }}</p>
+                    <ul class="overflow-auto">
                         @foreach ($selectedReports as $report)
                             <li class="bg-white mb-2 p-2 rounded-md shadow-md border-2 border-indigo-300">
                                 <div class="flex justify-between">
@@ -169,6 +169,7 @@
                     </ul>
                 </div>
             </div>
+            <div style="height:64px;"></div>
         </main>
 
         <footer class="bg-indigo-500 fixed bottom-0 left-0 w-full">

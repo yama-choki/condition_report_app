@@ -86,12 +86,12 @@ class ReportController extends Controller
         $loginUser = Auth::user();
         $selectedReports= Report::where('created_date', '=', $id)->get();
         $userNames = User::select('name')->get();
-
+        $day = $id;
         $selectedReportsUsers=[];
         foreach($selectedReports as $selectedReport){
             $selectedReportsUsers[] = $selectedReport->user;
         };
-        return view('reports.show', compact('selectedReports', 'selectedReportsUsers', 'userNames', 'loginUser'));
+        return view('reports.show', compact('selectedReports', 'selectedReportsUsers', 'userNames', 'loginUser', 'day'));
     }
 
     /**
