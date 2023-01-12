@@ -75,7 +75,7 @@
                                 <form method="POST" action="{{ route('logout') }}" >
                                     @csrf
 
-                                    <x-responsive-nav-link :href="route('logout')" class="text-white"
+                                    <x-responsive-nav-link :href="route('login')" class="text-white"
                                             onclick="event.preventDefault();
                                                         this.closest('form').submit();">
                                         {{ __('ログアウト') }}

@@ -7,7 +7,7 @@
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('登録しているメールアドレスに新しいパスワードを設定するリセットリンクをお送りします。') }}
+            {{ __('入力したメールアドレスに新しいパスワードを設定するリセットリンクをお送りします。') }}
         </div>
 
         <!-- Session Status -->
@@ -28,7 +28,7 @@
 
             <div class="flex items-center justify-end mt-4">
                 <x-primary-button>
-                    {{ __('メールを送信する') }}
+                    {{ __('リセットメールを送信') }}
                 </x-primary-button>
             </div>
         </form>
